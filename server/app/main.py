@@ -21,7 +21,8 @@ def create_app() -> Flask:
         "http://localhost:3000",  # React development server
         "http://127.0.0.1:3000",
         "http://0.0.0.0:3000",
-        "http://localhost"
+        "http://localhost",
+        "http://184.72.90.134"
     ])
 
     db.init_app(app)
