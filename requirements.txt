@@ -1,0 +1,6 @@
+flask
+flask_sqlalchemy
+sqlalchemy
+httpx
+psycopg2-binary
+pydantic[email]

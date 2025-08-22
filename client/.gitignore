@@ -1,0 +1,55 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node
+node_modules/
+.npm/
+.pnpm-store/
+.eslintcache
+
+# Build output
+dist/
+build/
+.out/
+.next/
+.vercel/
+
+# Framework/tool caches
+.vite/
+vite.config.ts.timestamp-*
+.parcel-cache/
+.turbo/
+.storybook-out/
+.svelte-kit/
+.astro/
+
+# Test coverage / artifacts
+coverage/
+.nyc_output/
+junit.xml
+
+# Env files (keep .env.example tracked)
+.env
+.env.*
+!.env.example
+
+# Editor/OS junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
+
+# Local tooling
+.eslintcache
+.stylelintcache
+.prettier-cache/
+.cache/
