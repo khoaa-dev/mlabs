@@ -1,3 +1,9 @@
+from dotenv import load_dotenv
+import os
+
+# Load environment variables TRƯỚC khi import các module khác
+load_dotenv()
+
 from flask import Flask, jsonify
 from flask_cors import CORS
 from .db import db, DATABASE_URL

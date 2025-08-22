@@ -14,6 +14,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    networks:
+      - app-network
 
   server:
     build:
@@ -34,6 +36,8 @@ services:
       - ./server:/app
     restart: unless-stopped
     command: python -m flask --app app.main run --host=0.0.0.0 --port=5143 --debug --reload
+    networks:
+      - app-network
 
   client:
     build:
@@ -44,6 +48,24 @@ services:
     depends_on:
       - server
     restart: unless-stopped
+    networks:
+      - app-network
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    networks:
+      - app-network
 
 volumes:
   postgres_data:
+  ollama_data:
+
+networks:
+  app-network:
+    driver: bridge
