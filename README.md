@@ -13,7 +13,7 @@ This is the technical exercise project for Movement Labs.
 ```
 ├── server/          # Flask backend API
 ├── client/          # React frontend
-├── docker-compose.yml
+├── docker compose.yml
 ```
 
 ## Getting Started with Docker (Recommended)
@@ -44,7 +44,7 @@ This is the technical exercise project for Movement Labs.
    
    Or manually:
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
 3. Access the application:
@@ -56,10 +56,10 @@ This is the technical exercise project for Movement Labs.
 4. Download AI model (first time setup):
    ```bash
    # Pull the Llama 3.2:1b model
-   docker-compose exec ollama ollama pull llama3.2:1b
+   docker compose exec ollama ollama pull llama3.2:1b
    
    # Verify model is available
-   docker-compose exec ollama ollama list
+   docker compose exec ollama ollama list
    ```
 
 ### Services
@@ -71,24 +71,24 @@ This is the technical exercise project for Movement Labs.
 ### Docker Commands
 ```bash
 # Start services in detached mode
-docker-compose up -d
+docker compose up -d
 
 # View logs
-docker-compose logs -f [service_name]
+docker compose logs -f [service_name]
 
 # Stop services
-docker-compose down
+docker compose down
 
 # Rebuild and start
-docker-compose up --build
+docker compose up --build
 
 # Reset database and AI models
-docker-compose down -v  # This removes volumes too
+docker compose down -v  # This removes volumes too
 
 # Manage AI models
-docker-compose exec ollama ollama list        # List installed models
-docker-compose exec ollama ollama pull <model>  # Download new model
-docker-compose exec ollama ollama rm <model>    # Remove model
+docker compose exec ollama ollama list        # List installed models
+docker compose exec ollama ollama pull <model>  # Download new model
+docker compose exec ollama ollama rm <model>    # Remove model
 ```
 
 ## AI Features
