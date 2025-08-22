@@ -21,6 +21,7 @@ services:
     build:
       context: .
       dockerfile: ./server/Dockerfile
+    container_name: app-server
     environment:
       DATABASE_URL: postgresql://postgres:postgres123@db:5432/mlabs_db
       FLASK_ENV: development
@@ -43,6 +44,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
+    container_name: app-client
     ports:
       - "3000:3000"
     depends_on:
@@ -55,12 +57,27 @@ services:
 
   ollama:
     image: ollama/ollama:latest
+    container_name: app-ollama
     ports:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
     environment:
       - OLLAMA_HOST=0.0.0.0:11434
+    networks:
+      - app-network
+
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+      target: development
+    container_name: app-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - server
     networks:
       - app-network
 
