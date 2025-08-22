@@ -98,6 +98,29 @@ export default function App() {
     return !s || [c.name, c.email, c.company, c.role].some(v => (v || "").toLowerCase().includes(s));
   });
 
+  // Hàm xuất CSV
+  function exportMessagesCSV() {
+    if (!messages.length) {
+      toast("No messages to export", { icon: "📭" });
+      return;
+    }
+    const header = ["ID", "Type", "Content"];
+    const rows = messages.map(m => [m.id, m.message_type, m.content.replace(/\r?\n|\r/g, " ")]);
+    const csv = [header, ...rows]
+      .map(row => row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(","))
+      .join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${selected?.name || "messages"}_messages.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast.success("CSV exported");
+  }
+
   return (
     <div className="app">
       <header className="app__bar">
@@ -148,7 +171,19 @@ export default function App() {
 
         {/* RIGHT */}
         <section className="card card--tall">
-          <div className="card__title">Messages</div>
+          <div className="card__title" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <span>Messages</span>
+            <button
+              className="btn btn--small"
+              style={{ marginLeft: 8 }}
+              onClick={exportMessagesCSV}
+              disabled={!messages.length}
+              type="button"
+              title="Export messages to CSV"
+            >
+              Export CSV
+            </button>
+          </div>
 
           <div className="contact__badge">
             {selected ? (

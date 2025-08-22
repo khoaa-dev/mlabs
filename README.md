@@ -12,10 +12,8 @@ This is the technical exercise project for Movement Labs.
 ## Architecture
 ```
 ├── server/          # Flask backend API
-├── client/          # React frontend  
-├── ollama/          # AI model serving (Llama 3.2:1b)
+├── client/          # React frontend
 ├── docker-compose.yml
-└── Database (PostgreSQL)
 ```
 
 ## Getting Started with Docker (Recommended)
@@ -31,7 +29,15 @@ This is the technical exercise project for Movement Labs.
    cd mlabs-exercise-chingo-main
    ```
 
-2. Start all services:
+
+2. Copy environment configuration files:
+   ```bash
+   cp .env.example .env
+   cp client/.env.example client/.env
+   cp server/.env.example server/.env
+   ```
+
+3. Start all services:
    ```bash
    ./start.sh
    ```
