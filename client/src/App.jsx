@@ -18,10 +18,12 @@ export default function App() {
 
   async function loadContacts() {
     try {
-      setContacts((await getContacts()) || []);
+      const data = await getContacts();
+      setContacts(Array.isArray(data) ? data : []);
     } catch (e) {
       console.error(e);
       toast.error(`Failed to load contacts: ${e.message}`);
+      setContacts([]); // Đảm bảo luôn là array
     }
   }
 

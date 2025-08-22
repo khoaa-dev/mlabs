@@ -45,6 +45,8 @@ services:
       context: ./client
       dockerfile: Dockerfile
     container_name: app-client
+    env_file:
+      - ./client/.env
     ports:
       - "3000:3000"
     depends_on:
@@ -68,10 +70,6 @@ services:
       - app-network
 
   nginx:
-    build:
-      context: ./docker/nginx
-      dockerfile: Dockerfile
-      target: development
     container_name: app-nginx
     ports:
       - "80:80"

@@ -2,7 +2,7 @@
 
 # Build and start all services
 echo "Building and starting all services..."
-docker compose up --build -d
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d
 
 # Wait for services to be healthy
 echo "Waiting for services to be ready..."

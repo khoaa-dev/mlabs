@@ -44,7 +44,7 @@ This is the technical exercise project for Movement Labs.
    
    Or manually:
    ```bash
-   docker compose up --build
+   docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d
    ```
 
 3. Access the application:
