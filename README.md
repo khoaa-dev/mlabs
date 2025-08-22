@@ -52,14 +52,15 @@ This is the technical exercise project for Movement Labs.
    - **Backend API**: http://localhost:5143
    - **Health Check**: http://localhost:5143/health
    - **Ollama API**: http://localhost:11434
+   - **Nginx**: http://locahost
 
 4. Download AI model (first time setup):
    ```bash
    # Pull the Llama 3.2:1b model
-   docker compose exec ollama ollama pull llama3.2:1b
+   docker compose -f docker-compose.yml -f docker-compose.dev.yml exec ollama ollama pull llama3.2:1b
    
    # Verify model is available
-   docker compose exec ollama ollama list
+   docker compose -f docker-compose.yml -f docker-compose.dev.yml exec ollama ollama list
    ```
 
 ### Services
@@ -67,28 +68,29 @@ This is the technical exercise project for Movement Labs.
 - **server**: Flask API backend with CORS enabled (port 5143)  
 - **client**: React frontend with Nginx (port 3000)
 - **ollama**: AI model server - Llama 3.2:1b (port 11434)
+- **nginx**: Nginx
 
 ### Docker Commands
 ```bash
 # Start services in detached mode
-docker compose up -d
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
 # View logs
-docker compose logs -f [service_name]
+docker compose -f docker-compose.yml -f docker-compose.dev.yml logs -f [service_name]
 
 # Stop services
-docker compose down
+docker compose -f docker-compose.yml -f docker-compose.dev.yml down
 
 # Rebuild and start
-docker compose up --build
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
 
 # Reset database and AI models
-docker compose down -v  # This removes volumes too
+docker compose -f docker-compose.yml -f docker-compose.dev.yml down -v  # This removes volumes too
 
 # Manage AI models
-docker compose exec ollama ollama list        # List installed models
-docker compose exec ollama ollama pull <model>  # Download new model
-docker compose exec ollama ollama rm <model>    # Remove model
+docker compose -f docker-compose.yml -f docker-compose.dev.yml exec ollama ollama list        # List installed models
+docker compose -f docker-compose.yml -f docker-compose.dev.yml exec ollama ollama pull <model>  # Download new model
+docker compose -f docker-compose.yml -f docker-compose.dev.yml exec ollama ollama rm <model>    # Remove model
 ```
 
 ## AI Features
