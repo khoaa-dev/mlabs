@@ -1,5 +1,6 @@
 flask
 flask_sqlalchemy
+flask-cors
 sqlalchemy
 httpx
 psycopg2-binary

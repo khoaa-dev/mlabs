@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/", // Vite proxy will forward /contacts and /messages to :8000
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5143",
   headers: { "Content-Type": "application/json" },
 });
 

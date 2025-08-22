@@ -18,11 +18,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY server/ .
 
-# Set Python path to include app directory
+# Set environment variables for development
+ARG PYTHONPATH
+
 ENV PYTHONPATH="/app:$PYTHONPATH"
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
 
 # Expose the port
 EXPOSE 5143
 
-# Command to run the application
-CMD ["python", "-m", "app.main"]
+# Default command - can be overridden in docker-compose
+CMD ["python", "-m", "flask", "--app", "app.main", "run", "--host=0.0.0.0", "--port=5143", "--debug", "--reload"]

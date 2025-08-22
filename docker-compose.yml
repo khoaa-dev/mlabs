@@ -21,6 +21,10 @@ services:
       dockerfile: ./server/Dockerfile
     environment:
       DATABASE_URL: postgresql://postgres:postgres123@db:5432/mlabs_db
+      FLASK_ENV: development
+      FLASK_DEBUG: 1
+      PYTHONDONTWRITEBYTECODE: 1
+      PYTHONUNBUFFERED: 1
     ports:
       - "5143:5143"
     depends_on:
@@ -29,6 +33,7 @@ services:
     volumes:
       - ./server:/app
     restart: unless-stopped
+    command: python -m flask --app app.main run --host=0.0.0.0 --port=5143 --debug --reload
 
   client:
     build:

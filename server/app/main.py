@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 from .db import db, DATABASE_URL
 from .models import Contact, Message  
 from .router.contacts import router as contacts_router
@@ -8,6 +9,13 @@ def create_app() -> Flask:
     app = Flask(__name__)
     app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    # Configure CORS
+    CORS(app, origins=[
+        "http://localhost:3000",  # React development server
+        "http://127.0.0.1:3000",
+        "http://0.0.0.0:3000",
+    ])
 
     db.init_app(app)
 
